@@ -22,7 +22,7 @@ uv run streamlit run app.py
 2. Set the time you want your day to start
 3. Click **Generate My Plan**
 
-Claude extracts every actionable item, estimates realistic durations, assigns priorities, and builds a time-blocked schedule with 5-minute buffers between tasks.
+Claude extracts every actionable item, estimates realistic durations, assigns priorities, and builds a time-blocked schedule with buffers between tasks.
 
 You can download the full plan as JSON.
 
