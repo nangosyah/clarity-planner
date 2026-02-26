@@ -1,0 +1,10 @@
+[project]
+name = "clarity-planner"
+version = "0.1.0"
+description = "Turn messy thoughts into a structured time-blocked plan using Claude"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.40.0",
+    "streamlit>=1.40.0",
+    "python-dotenv>=1.0.0",
+]
