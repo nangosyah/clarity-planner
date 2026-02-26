@@ -1,6 +1,6 @@
 # Clarity Planner
 
-Turn a messy brain-dump into a structured, time-blocked daily plan — powered by Claude.
+Turn a messy brain-dump into a structured, time-blocked daily plan using Claude.
 
 ## Setup
 
@@ -18,7 +18,7 @@ uv run streamlit run app.py
 
 ## Usage
 
-1. Paste anything — a rough task list, scattered thoughts, random notes
+1. Paste anything including a rough task list, scattered thoughts, random notes
 2. Set the time you want your day to start
 3. Click **Generate My Plan**
 
