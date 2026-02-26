@@ -1,5 +1,7 @@
 # Clarity Planner
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://clarity-planner.streamlit.app)
+
 Turn a messy brain-dump into a structured, time-blocked daily plan using Claude.
 
 ## Setup
@@ -18,13 +20,13 @@ uv run streamlit run app.py
 
 ## Usage
 
-1. Paste anything including a rough task list, scattered thoughts, random notes
+1. Paste anything — a rough task list, scattered thoughts, random notes
 2. Set the time you want your day to start
 3. Click **Generate My Plan**
 
-Claude extracts every actionable item, estimates realistic durations, assigns priorities, and builds a time-blocked schedule with 5-minute buffers between tasks.
+Claude extracts every actionable item, estimates realistic durations, assigns context-aware transition buffers between tasks, and builds a time-blocked schedule ordered by priority.
 
-You can download the full plan as JSON.
+Download the result as an `.ics` file to import all events directly into Google Calendar or Apple Calendar.
 
 ## Reproducibility
 
