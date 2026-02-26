@@ -74,6 +74,7 @@ Given a brain-dump of thoughts, tasks, or a to-do list, you MUST return a single
       "title": "Short task title",
       "description": "What needs to be done",
       "duration_minutes": 30,
+      "buffer_minutes": 5,
       "priority": "high|medium|low",
       "category": "Work|Personal|Admin|Learning|Health|Other"
     }
@@ -83,6 +84,14 @@ Given a brain-dump of thoughts, tasks, or a to-do list, you MUST return a single
 Rules:
 - Extract every actionable item you find.
 - Estimate realistic durations (15–180 min). Default to 30 min if unclear.
+- Set buffer_minutes to the transition time needed AFTER this task before the next one starts.
+  Use your judgement based on the task type:
+  - Physical activity (gym, run, sport): 15–20 min (cool down, shower)
+  - Deep focus work (writing, coding, slides): 10 min (mental reset)
+  - Short admin tasks (email, booking, paying a bill): 0–5 min
+  - Calls or meetings: 5 min
+  - Meals: 0 min (already accounted for in duration)
+  - Last task of the day: 0 min
 - Assign priority based on urgency/importance cues in the text. Default to "medium".
 - Order tasks from highest to lowest priority.
 - Return ONLY the JSON object — no markdown fences, no explanation."""
@@ -116,16 +125,20 @@ def parse_brain_dump(text: str, start_time: datetime) -> dict:
         st.code(raw)
         st.stop()
 
-    # Attach computed start/end datetimes
+    # Attach computed start/end datetimes using model-assigned buffers
     cursor = start_time
-    for task in plan.get("tasks", []):
+    tasks = plan.get("tasks", [])
+    for i, task in enumerate(tasks):
         task["start"] = cursor.strftime("%H:%M")
         task["start_dt"] = cursor.isoformat()
         duration = int(task.get("duration_minutes", 30))
         cursor += timedelta(minutes=duration)
         task["end"] = cursor.strftime("%H:%M")
         task["end_dt"] = cursor.isoformat()
-        cursor += timedelta(minutes=5)  # 5-min buffer
+        # No buffer after the last task
+        if i < len(tasks) - 1:
+            buffer = int(task.get("buffer_minutes", 5))
+            cursor += timedelta(minutes=buffer)
 
     return plan
 
@@ -267,7 +280,7 @@ if run and brain_dump.strip():
             <span class="time-badge">{task.get('start', '')} – {task.get('end', '')}</span>
             <span class="priority-badge {priority}">{priority.upper()}</span>
             &nbsp;<strong>{task['title']}</strong>
-            &nbsp;<small style="color:#6c757d">· {task.get('category','Other')} · {task.get('duration_minutes',30)} min</small>
+            &nbsp;<small style="color:#6c757d">· {task.get('category','Other')} · {task.get('duration_minutes',30)} min · {task.get('buffer_minutes',0)} min buffer</small>
             <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#495057">{task.get('description','')}</p>
         </div>
         """
