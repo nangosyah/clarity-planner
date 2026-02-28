@@ -1,10 +1,5 @@
 # Clarity Planner
 
-<<<<<<< HEAD
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://clarity-planner.streamlit.app)
-
-=======
->>>>>>> 502ffcbe746a3a1717c50b3aa25d5f34de3ec2df
 Turn a messy brain-dump into a structured, time-blocked daily plan using Claude.
 
 ## Setup
