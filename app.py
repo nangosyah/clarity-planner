@@ -107,9 +107,9 @@ def parse_brain_dump(text: str, start_time: datetime) -> dict:
 
     with st.spinner("Thinking through your tasks…"):
         response = client.messages.create(
-            model="claude-opus-4-6",
+            model="claude-opus-4-5",
             max_tokens=2048,
-            thinking={"type": "adaptive"},
+            thinking={"type": "enabled", "budget_tokens": 1024},
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": text}],
         )
