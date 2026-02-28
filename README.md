@@ -16,26 +16,3 @@ cp .env.example .env
 uv run streamlit run app.py
 ```
 
-## Usage
-
-<<<<<<< HEAD
-1. Paste anything — a rough task list, scattered thoughts, random notes
-2. Set the time you want your day to start
-3. Click **Generate My Plan**
-
-Claude extracts every actionable item, estimates realistic durations, assigns context-aware transition buffers between tasks, and builds a time-blocked schedule ordered by priority.
-
-Download the result as an `.ics` file to import all events directly into Google Calendar or Apple Calendar.
-=======
-1. Paste anything including a rough task list, scattered thoughts, random notes
-2. Set the time you want your day to start
-3. Click **Generate My Plan**
-
-Claude extracts every actionable item, estimates realistic durations, assigns priorities, and builds a time-blocked schedule with buffers between tasks.
-
-You can download the full plan as JSON.
->>>>>>> 502ffcbe746a3a1717c50b3aa25d5f34de3ec2df
-
-## Reproducibility
-
-Dependencies are pinned in `uv.lock`. Anyone cloning this repo gets the exact same environment with `uv sync`.
