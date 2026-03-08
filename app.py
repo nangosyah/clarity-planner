@@ -98,9 +98,14 @@ Rules:
 
 
 def parse_brain_dump(text: str, start_time: datetime) -> dict:
-    api_key = os.getenv("ANTHROPIC_API_KEY") or st.secrets.get("ANTHROPIC_API_KEY", "")
+    api_key = os.getenv("ANTHROPIC_API_KEY", "")
     if not api_key:
-        st.error("ANTHROPIC_API_KEY not set. Add it to a .env file or Streamlit secrets.")
+        try:
+            api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
+        except Exception:
+            api_key = ""
+    if not api_key:
+        st.error("ANTHROPIC_API_KEY not set. Add it as an environment variable in Connect Cloud settings.")
         st.stop()
 
     client = anthropic.Anthropic(api_key=api_key)
@@ -116,6 +121,13 @@ def parse_brain_dump(text: str, start_time: datetime) -> dict:
     raw = next(
         (block.text for block in response.content if block.type == "text"), "{}"
     )
+
+    # Strip markdown code fences if the model wraps output despite the prompt
+    raw = raw.strip()
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[-1]  # drop opening fence line
+        raw = raw.rsplit("```", 1)[0]  # drop closing fence
+    raw = raw.strip()
 
     try:
         plan = json.loads(raw)
