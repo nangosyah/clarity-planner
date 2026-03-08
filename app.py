@@ -109,7 +109,6 @@ def parse_brain_dump(text: str, start_time: datetime) -> dict:
         response = client.messages.create(
             model="claude-opus-4-5",
             max_tokens=2048,
-            thinking={"type": "enabled", "budget_tokens": 1024},
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": text}],
         )
