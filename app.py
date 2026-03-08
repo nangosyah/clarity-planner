@@ -112,8 +112,8 @@ def parse_brain_dump(text: str, start_time: datetime) -> dict:
 
     with st.spinner("Thinking through your tasks…"):
         response = client.messages.create(
-            model="claude-opus-4-5",
-            max_tokens=2048,
+            model="claude-haiku-4-5-20251001",  # Cheapest model: $0.25/$1.25 per million tokens
+            max_tokens=10096,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": text}],
         )
